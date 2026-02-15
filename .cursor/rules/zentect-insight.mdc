@@ -1,0 +1,28 @@
+---
+description: zentect Insight セールスメディアのデザイン方針と実装要件
+globs: 
+alwaysApply: true
+---
+
+# zentect Insight デザイン方針
+
+あなたはNext.jsのエキスパートです。
+セールスメディア「zentect Insight」のモックアップを作成します。
+
+## デザイン方針：Structure & Trust（構造と信頼）
+
+- **コンセプト:** "Tect"（構造）を強調。曖昧な余白やグラデーションよりも、グリッドシステムと明確なボーダーラインを重視する。
+- **印象:** 知的、データドリブン、堅実。
+- **動き:** Static & Solid。過度なアニメーションは排除し、表示速度とレスポンスの速さを最優先する。
+
+## 配色ルール（Strict Blue）
+
+- **Main Action:** brand-teal (#00AABA) を一貫して使用。
+- **Accent:** brand-moss (#65CCAD) は「アイコン」や「タグ」などのワンポイントのみに限定。
+- **Base:** 白 (#FFFFFF) と薄いグレー (#F3F4F6) をベースに、濃いグレーのボーダーで区切る。
+
+## 実装要件
+
+- **Framework:** Next.js (App Router)
+- **Styling:** Tailwind CSS
+- **Font:** Inter + Noto Sans JP (Google Fonts)
