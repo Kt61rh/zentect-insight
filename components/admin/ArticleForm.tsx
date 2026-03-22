@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type { Article, BodyBlock, ArticleInsert } from "@/lib/types";
 import { generateSlug } from "@/lib/utils";
 import { BodyEditor } from "@/components/admin/BodyEditor";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 import {
   createArticle,
   updateArticle,
@@ -158,18 +159,9 @@ export function ArticleForm({ article }: Props) {
           />
         </div>
 
-        {/* アイキャッチ画像URL */}
+        {/* アイキャッチ画像 */}
         <div className="lg:col-span-2">
-          <label className="mb-1 block text-sm font-medium text-gray-700">
-            アイキャッチ画像URL
-          </label>
-          <input
-            type="text"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none focus:ring-1 focus:ring-brand-teal"
-            placeholder="https://..."
-          />
+          <ImageUpload value={imageUrl} onChange={setImageUrl} />
         </div>
       </div>
 
