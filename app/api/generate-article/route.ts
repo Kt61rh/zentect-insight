@@ -34,7 +34,26 @@ export async function POST(request: NextRequest) {
     const model = getGeminiModel();
     const result = await model.generateContent(prompt);
     const text = result.response.text();
-    const article: GenerationOutput = JSON.parse(text);
+
+    // finishReason が長さ制限の場合はエラーにする
+    const finishReason = result.response.candidates?.[0]?.finishReason;
+    if (finishReason === "MAX_TOKENS") {
+      console.error("Gemini response truncated (MAX_TOKENS)");
+      return NextResponse.json(
+        { error: "生成された記事が長すぎました。文字数を短くして再度お試しください。" },
+        { status: 500 }
+      );
+    }
+
+    let article: GenerationOutput;
+    try {
+      article = JSON.parse(text);
+    } catch (parseError) {
+      console.error("JSON parse failed. Raw response length:", text.length);
+      console.error("Raw response (first 500 chars):", text.substring(0, 500));
+      console.error("finishReason:", finishReason);
+      throw new Error("AIの応答をJSONとして解析できませんでした。再度お試しください。");
+    }
 
     return NextResponse.json(article);
   } catch (error) {
