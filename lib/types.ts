@@ -1,7 +1,8 @@
 export type BodyBlock =
   | { type: "p"; content: string }
   | { type: "h2"; content: string }
-  | { type: "h3"; content: string };
+  | { type: "h3"; content: string }
+  | { type: "image"; content: string; alt?: string };
 
 export type ArticleStatus = "draft" | "published";
 

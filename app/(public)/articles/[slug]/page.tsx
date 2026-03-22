@@ -32,6 +32,24 @@ function ArticleBody({ body }: { body: BodyBlock[] }) {
             </h3>
           );
         }
+        if (block.type === "image" && block.content) {
+          return (
+            <figure key={index} className="my-6">
+              <Image
+                src={block.content}
+                alt={block.alt ?? ""}
+                width={800}
+                height={450}
+                className="w-full rounded-md"
+              />
+              {block.alt && (
+                <figcaption className="mt-2 text-center text-xs text-gray-500">
+                  {block.alt}
+                </figcaption>
+              )}
+            </figure>
+          );
+        }
         return (
           <p key={index} className="mb-4 text-[#333333] leading-relaxed">
             {block.content}
