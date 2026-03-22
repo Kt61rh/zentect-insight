@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 type ArticleCardProps = {
-  id: number;
+  id: string | number;
   slug: string;
   title: string;
   category: string;

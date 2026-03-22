@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { ArticleCard } from "@/components/ArticleCard";
-import { articles } from "@/src/constants/mockData";
+import { getPublishedArticles } from "@/lib/articles";
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const articles = await getPublishedArticles();
+
   return (
     <>
       {/* Section 1: Hero Area */}
@@ -33,11 +37,26 @@ export default function Home() {
       {/* Section 2: Article Grid */}
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-16">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {articles.map((article) => (
-              <ArticleCard key={article.id} {...article} />
-            ))}
-          </div>
+          {articles.length === 0 ? (
+            <p className="text-center text-gray-500">
+              記事はまだ公開されていません
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {articles.map((article) => (
+                <ArticleCard
+                  key={article.id}
+                  id={article.id}
+                  slug={article.slug}
+                  title={article.title}
+                  category={article.category}
+                  summary={article.summary}
+                  date={article.published_at ?? article.created_at}
+                  image={article.image_url || "/article-placeholder.svg"}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </>
